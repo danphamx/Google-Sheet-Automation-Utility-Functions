@@ -1,0 +1,12 @@
+/*
+  Converts HTML into a Google Doc file 
+  */
+
+  var full_html = html_intro + html + closing_html;  
+   var blob1 = Utilities.newBlob("").setDataFromString(full_html, "UTF-8").setContentType("text/html");  
+  
+   var newFile = Drive.Files.insert({title: subject}, blob1, {convert: true});
+   var fileId = newFile.id; 
+   moveFileToAnotherFolder(fileId,"--INSERT GOOGLE DRIVE FOLDER ID HERE--");
+   var newFileURL = "https://docs.google.com/document/d/" + fileId;
+   Logger.log(newFileURL);
