@@ -1,0 +1,28 @@
+/*
+  Log user edits
+  */
+
+function onEdit() {
+  var s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("--INSERT SHEET NAME--");;
+  var r = s.getActiveCell();
+  
+  // I will log user edits in Col 4 (Col D)
+  if( r.getColumn() != 4 ) {     
+    var row = r.getRow();
+    var time = new Date();
+    time = Utilities.formatDate(time, "America/Los_Angeles", "yyyy-MM-dd HH:mm") + " PST";
+    if (row == 1) {
+      //do nothing if it's the header row
+    } else {
+      try {
+        var user = Session.getEffectiveUser().getEmail();
+        var ldap = user.substring(0, user.lastIndexOf("@"));
+        SpreadsheetApp.getActiveSheet().getRange('D' + row.toString()).setValue(time + " by " + ldap );   //Col 4
+      }
+      catch(err) {
+        var time = new Date();
+        time = Utilities.formatDate(time, "America/Los_Angeles", "yyyy-MM-dd HH:mm") + " PST Time"; 
+        SpreadsheetApp.getActiveSheet().getRange('D' + row.toString()).setValue(time + " by Employee" );} . //Col 4
+    }   
+  };
+ };
