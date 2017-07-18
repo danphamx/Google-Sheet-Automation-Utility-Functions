@@ -1,0 +1,15 @@
+
+/*
+  var message = {html content}
+  */
+
+  var html = message;
+  var blob = Utilities.newBlob(html, "text/html", "text.html");
+  var pdf = blob.getAs("application/pdf");    
+  var newFileId = DriveApp.createFile(pdf).setName(subject);
+  
+  GmailApp.sendEmail(recipients, newFileId, message, {
+      htmlBody: newFileId,
+      from: 'danpham@google.com',
+      name: 'Cloud Landings Dashboard'
+  }); 
