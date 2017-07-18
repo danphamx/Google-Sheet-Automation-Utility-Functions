@@ -1,0 +1,44 @@
+
+/*
+  Sends an email after converting Spreadsheet table contents into HTML
+  */
+  
+function sendEmail() { 
+  
+var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var date = sheet.getRange("--INSERT RANGE--").getValue() ;
+  var cleandate = Utilities.formatDate(date, "PST", "dd MMMM yyyy")
+  
+  var subject = "Emailer" + cleandate + "";
+  var recipients = "--INSERT EMAIL ADDRESSES--"; 
+  var cc = "";
+  var bcc = "";
+  
+  var lastRow = sheet.getLastRow();
+  var lastColumn = sheet.getLastColumn();
+  var data = sheet.getRange(1,1,lastRow,lastColumn).getValues(); // define your range here
+ 
+  var message = '<body>';
+  
+  // Introduction Email Message
+    message += '' ; 
+  
+  // Table begins
+  message += '<table><tr>';
+  for (var row=0;row<data.length;++row){
+    for(var col = 0;col<data[0].length;++col){
+      message += '<td>'+data[row][col]+'</td>';
+      }
+      message += '</tr><tr>';
+    }
+    message += '</tr></table>';
+    message += '';
+    message += '</body>';
+  
+   MailApp.sendEmail(recipients, subject, "", {
+     htmlBody: message,
+     'cc': cc,
+     'name': "-- INSERT YOUR NAME HERE --", 
+     'bcc': bcc
+   });
+}
