@@ -1,0 +1,23 @@
+/*
+  Simple js script to look up if today is a certain day of the week
+
+  https://stackoverflow.com/users/26210/andrew-moore
+  source: https://stackoverflow.com/questions/1181219/determine-if-a-date-is-a-saturday-or-a-sunday-using-javascript
+*/
+
+var today = new Date();
+if(today.getDay() == 6 || today.getDay() == 0) alert('Weekend!');  //6 = Saturday, 0 = Sunday
+
+
+/* 
+  // In order to see if an arbitrary date is a weekend day, you can use the following:
+
+  var myDate = new Date();
+  myDate.setFullYear(2009);
+  myDate.setMonth(7);
+  myDate.setDate(25);
+
+  if(myDate.getDay() == 6 || myDate.getDay() == 0) alert('Weekend!');
+  shareedit
+  
+  */
