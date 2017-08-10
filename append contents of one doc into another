@@ -1,0 +1,29 @@
+function importInDoc() {
+  var docID = 'doc id of the destination doc';
+  var baseDoc = DocumentApp.openById(docID);
+  var body = baseDoc.getBody();
+
+  var otherBody = DocumentApp.openById('doc id of the source doc').getBody();
+  
+  var totalElements = otherBody.getNumChildren();
+  for( var j = 0; j < totalElements; ++j ) {
+    var element = otherBody.getChild(j).copy();
+    var type = element.getType();
+    Logger.log (type);
+    if( type == DocumentApp.ElementType.PARAGRAPH )
+      body.appendParagraph(element)
+    else if( type == DocumentApp.ElementType.TABLE )
+      body.appendTable(element);
+    else if( type == DocumentApp.ElementType.LIST_ITEM )
+      body.appendListItem(element);
+    else if( type == DocumentApp.ElementType.INLINE_IMAGE )
+      body.appendImage(element)
+    else if( type == DocumentApp.ElementType.POSITIONED_IMAGE )
+      body.appendImage(element)
+
+    // add other element types as you want
+
+    else
+      throw new Error("According to the doc this type couldn't appear in the body: "+type);
+  }
+}
