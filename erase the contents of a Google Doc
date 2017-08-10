@@ -1,0 +1,4 @@
+function eraseContent(docId){
+
+  var doc = DocumentApp.openById(docId); doc.setText('');
+  }
