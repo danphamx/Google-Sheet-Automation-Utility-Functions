@@ -22,7 +22,7 @@ function onEdit() {
       catch(err) {
         var time = new Date();
         time = Utilities.formatDate(time, "America/Los_Angeles", "yyyy-MM-dd HH:mm") + " PST Time"; 
-        SpreadsheetApp.getActiveSheet().getRange('D' + row.toString()).setValue(time + " by Employee" );} . //Col 4
+        SpreadsheetApp.getActiveSheet().getRange('D' + row.toString()).setValue(time + " by Employee" );}  //Col 4
     }   
   };
  };
