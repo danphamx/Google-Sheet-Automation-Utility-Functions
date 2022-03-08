@@ -1,0 +1,67 @@
+function main() {
+  var activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var currentDataSheet = activeSpreadsheet.getSheetByName("Queried Data");
+  var currentDataDict = getDataDict(currentDataSheet, 2, 3)
+  postAlertMessage(currentDataDict)
+  //Logger.log(Object.keys(currentDataDict))
+}
+
+function postAlertMessage(currentDataDict) {
+  var post_url = <webhook url goes here>; 
+  var jira_list = Object.keys(currentDataDict)
+
+
+  var post_text = '*Here is are jira details for all issues from my filter* \n\n'
+
+  for (i=0; i<jira_list.length; i++) {
+
+    post_text = post_text + "*" + (i+1) +".* JIRA ID: " + jira_list[i] + " | Assignee: " + currentDataDict[jira_list[i]]["Assignee"] + "\n" 
+  }
+  var options = {
+    "method" : "post",
+    "payload": JSON.stringify( {
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": post_text
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "_For details check out this dashboard <link goes here>_"
+          }
+        }
+      ]
+    } )
+  }
+  //Logger.log(post_text)
+  UrlFetchApp.fetch(post_url, options);
+}
+
+
+function getDataDict(sheet, startRow, startCol){
+  var endRow = sheet.getLastRow();
+  var endCol = sheet.getLastColumn();
+  var dataDict = {}
+
+  if (endRow == 1) {
+    return dataDict
+  }
+
+  var range = sheet.getRange(startRow, startCol, endRow-startRow+1 , endCol-startCol+1)
+
+  Logger.log(range.getValues())
+  
+  for (i=0 ; i < range.getValues().length; i++) {
+    var rowVal = range.getValues()[i]
+    dataDict[rowVal[0]] = {"Assignee": rowVal[1], "Summary": rowVal[2], "Priority": rowVal[3], "Weekly Update": rowVal[4],  "Project Status": rowVal[5],  "Status": rowVal[6],  "Start Date": rowVal[7],  "TS Date": rowVal[8], "Launch Date": rowVal[9], "Eng Weeks Left": rowVal[10], "Labels": rowVal[11], "Issue Type": rowVal[12]} 
+  }
+  return dataDict
+}
