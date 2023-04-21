@@ -3,7 +3,7 @@
   */
 
 function onEdit() {
-  var s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("SpreadsheetName");
+  var s = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Sheet1"); // Replace with Sheet Name if needed
   var r = s.getActiveCell();
   
   // I will log user edits in Col 4 (Col D)
@@ -15,8 +15,7 @@ function onEdit() {
       //do nothing if it's the header row
     } else {
       try {
-        var user = Session.getEffectiveUser().getEmail();
-        // Note: Google has changed the way you log Emails. See https://developers.google.com/apps-script/reference/base/user if you want to update this :) 
+        var user = Session.getEffectiveUser().getEmail();  -- Note: Google has changed the way you log Emails. See https://developers.google.com/apps-script/reference/base/user if you want to update this :) 
         var ldap = user.substring(0, user.lastIndexOf("@"));
         SpreadsheetApp.getActiveSheet().getRange('D' + row.toString()).setValue(time);   //Col 4
       }
