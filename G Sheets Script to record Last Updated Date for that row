@@ -17,12 +17,12 @@ function onEdit() {
       try {
         var user = Session.getEffectiveUser().getEmail();
         var ldap = user.substring(0, user.lastIndexOf("@"));
-        SpreadsheetApp.getActiveSheet().getRange('P' + row.toString()).setValue(time);   //Col 4
+        SpreadsheetApp.getActiveSheet().getRange('D' + row.toString()).setValue(time);   //Col 4
       }
       catch(err) {
         var time = new Date();
         time = Utilities.formatDate(time, "America/Los_Angeles", "yyyy-MM-dd"); 
-        SpreadsheetApp.getActiveSheet().getRange('P' + row.toString()).setValue(time);}  //Col 4
+        SpreadsheetApp.getActiveSheet().getRange('D' + row.toString()).setValue(time);}  //Col 4
     }   
   };
  };
