@@ -16,6 +16,7 @@ function onEdit() {
     } else {
       try {
         var user = Session.getEffectiveUser().getEmail();
+        // Note: Google has changed the way you log Emails. See https://developers.google.com/apps-script/reference/base/user if you want to update this :) 
         var ldap = user.substring(0, user.lastIndexOf("@"));
         SpreadsheetApp.getActiveSheet().getRange('D' + row.toString()).setValue(time);   //Col 4
       }
