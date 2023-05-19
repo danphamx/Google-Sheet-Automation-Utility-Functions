@@ -6,7 +6,7 @@ function myImprovedImportRange(spreadsheetIdSource,sheetNameSource,rangeNameSour
 
   var target = SpreadsheetApp.openById(spreadsheetIdDestination);
   var target_sheet = target.getSheetByName(sheetNameDestination);
-  var target_range = target_sheet.getRange(rangeNameSource);
+  var target_range = target_sheet.getRange(rangeNameDestination);
   Logger.log(target_range);
 
   var values = source_range.getValues();
