@@ -46,6 +46,13 @@ function onEdit(e) {
   } else if (newValue == "") {
     typeChange = "Remove";  
   } 
+
+  // Replace E with the "Project Name" so you know which project is being modified
+  if (cell){
+    var a1Notation = cell.getA1Notation()
+    var row = cell.getRow();
+    var projName = "E"+row.getValue();
+  }
   
-  changelogSheet.appendRow([timestamp, currentSheetName, cell.getA1Notation(), typeChange, previousValue, newValue, user]);
+  changelogSheet.appendRow([timestamp, currentSheetName, cell.getA1Notation(), typeChange, previousValue, newValue, user, projName]);
 }
