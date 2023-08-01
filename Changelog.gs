@@ -54,5 +54,5 @@ function onEdit(e) {
     var projName = "E"+row.getValue();
   }
   
-  changelogSheet.appendRow([timestamp, currentSheetName, cell.getA1Notation(), typeChange, previousValue, newValue, user, projName]);
+  changelogSheet.appendRow([timestamp, currentSheetName, a1Notation, typeChange, previousValue, newValue, user, projName]);
 }
